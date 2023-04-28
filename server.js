@@ -5,7 +5,7 @@ const { shuffle } = require("./src/shuffle");
 const path = require("path");
 const Rollbar = require("rollbar");
 const rollbar = new Rollbar({
-	accessToken: "6e84aff94c4f4b69bcfb0d209dbca7e8",
+	accessToken: "Put in own access code!",
 	captureUncaught: true,
 	captureUnhandledRejections: true,
 });
@@ -20,8 +20,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+rollbar.log("site has been deployed");
+
 app.get("/", (req, res) => {
-	rollbar.log("Someone accessed the home page!!");
+	rollbar.log("Site has been accessed!")
 	res.status(200).sendFile(path.join(__dirname, "./public/index.html"));
 });
 
