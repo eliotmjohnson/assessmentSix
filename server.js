@@ -18,14 +18,15 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
-
-rollbar.log("site has been deployed");
 
 app.get("/", (req, res) => {
 	rollbar.log("Site has been accessed!")
 	res.status(200).sendFile(path.join(__dirname, "./public/index.html"));
 });
+
+app.use(express.static("public"));
+
+rollbar.log("site has been deployed");
 
 // Add up the total health of all the robots
 const calculateTotalHealth = (robots) =>
